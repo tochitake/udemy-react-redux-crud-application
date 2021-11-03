@@ -1,4 +1,5 @@
-import React from "react";
+import userEvent from "@testing-library/user-event";
+import React, { useReducer } from "react";
 
 /*function App() {
   return (
@@ -11,17 +12,28 @@ import React from "react";
 }*/
 
 const App = () => {
+  const profiles = [
+    {name: "Taro", age:10}, 
+    {name: "Hanako", age:6},
+    {name: "Kenji"}
+  ]
   return (
   <div>
-    <Cat/>
-    <Cat/>
-    <Cat/>
+    {
+      profiles.map((profile, index) => {
+        return <User name={profile.name} age={profile.age} key={index} />
+      })
+    }
   </div>
   )
 }
 
-const Cat = () => {
-  return <div>Meow!</div>
+const User = (props) => {
+  return <div>HI, I am {props.name}, and {props.age} years old!</div>
+}
+
+User.defaultProps = {
+  age:1
 }
 
 export default App;
